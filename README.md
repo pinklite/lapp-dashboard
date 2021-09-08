@@ -6,8 +6,6 @@
 Lapp Dashboard is a simple server that monitors any web endpoints (specifically, any website / API and lightning network nodes), and allows users to view their current status from the browser or, optionally, over Discord or on their BlockClock Mini.
 
 ## How to use
-*Note: Connection to LND over Tor does not currently function properly*
-
 First, download & prepare the express app:
 ```
 git clone https://github.com/katokishin/lapp-dashboard
@@ -41,4 +39,24 @@ npm start
 ```
 
 ## Tor support
-If you have Tor installed on your system, you can also monitor services & nodes over Tor. Simply set the `url` parameter to the onion address of your endpoint/node host. DO NOT prepend http(s):// in this case. Note that updates over Tor can be quite slow / unreliable.
+If you have Tor installed on your system, you can also monitor services & nodes over Tor.
+
+Example `listService.json` and `.env` for monitoring LND over Tor: 
+```
+[
+  {
+    "position": 0,
+    "name": "LND1",
+    "type": "LND",
+    "url": "https://someonionaddress.onion:8080",
+    "macaroon": "somehexademicalmacaroon123..."
+  },
+  ...
+]
+```
+This also should not require manual settings in `.env` as long as defaults are used for Tor & LND REST API.
+
+## Getting a readonly.macaroon from Lnd
+From the `.lnd` directory, perform `xxd -ps data/chain/bitcoin/mainnet/readonly.macaroon` to get it in hexadecimal format.
+
+Remove newlines and add to `listService.json` where necessary.

@@ -5,7 +5,7 @@
  *    position: INTEGER 0-6 (0=leftmost digit, 6=rightmost digit),
  *    name: STRING 1-4 chars,
  *    type: 'WEB' or 'LND' for now,
- *    url: http/https, port optional, OR asdfasd.onion address WITHOUT http prefix
+ *    url: URL or onion address, starting with http:// or https://. Port optional, use :8080 for LND default
  *    macaroon: readonly macaroon in hexadecimal (ONLY necessary for LND)
  * }, ...]
  * 

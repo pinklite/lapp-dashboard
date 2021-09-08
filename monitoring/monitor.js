@@ -1,7 +1,7 @@
 const bcMini = require('../notify/blockClockMini')
 const discordMessage = require('../notify/discord')
 const resultDB = require('../monitoring/resultDB')
-const torFetch = require('./torFetch')
+const torRequest = require('./torRequest')
 const axios = require('axios')
 const https = require('https')
 const agent = new https.Agent({
@@ -38,6 +38,10 @@ const sleep = (milliseconds) => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
+const isOnion = (address) => {
+  return !!address.match(/^https?:\/\/[\w\-\.]+\.onion+(\:[0-9])?/)
+}
+
 // When starting this app
 // Pause automatic updates
 bcMini.pause()
@@ -53,7 +57,7 @@ const monitor = async (services) => {
 
     resultDB.getLatestResult(s.position, prev => {
       // If clearnet
-      if (s.url.substring(0,7) === 'http://' || s.url.substring(0,8) === 'https://') {
+      if (!isOnion(s.url)) {
         if (s.type === 'WEB') {
           axios.get('/', {
             baseURL: s.url,
@@ -91,7 +95,7 @@ const monitor = async (services) => {
       } else {
         // If tor 
         if (s.type === 'WEB') {
-          torFetch(s.url, bool => {
+          torRequest(s.url, bool => {
             if (bool) {
               handleSuccess(prev, s.position, s.name)
             } else {
@@ -100,8 +104,7 @@ const monitor = async (services) => {
           })
         }
         if (s.type === 'LND') {
-          console.log('Fetching via Tor: ', s.name)
-          torFetch(s.url, bool => {
+          torRequest(s.url + (process.env.LND_API_ROUTE || '/v1/getinfo'), bool => {
             if (bool) {
               handleSuccess(prev, s.position, s.name)
             } else {

@@ -17,7 +17,8 @@
     "lnd-grpc": "^0.5.0",
     "morgan": "~1.9.1",
     "node-cron": "^3.0.0",
+    "socks5-https-client": "^1.2.1",
     "sqlite3": "^5.0.2",
-    "torfetch": "^0.1.1"
+    "tor-request": "^3.1.0"
   }
 }
