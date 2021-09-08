@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %>. Refresh page to get latest condition of apps. Page will refresh automatically every 5 minutes.</p>
+    <p>Last update: <%= time %></p>
+    <ul>
+      <% services.forEach(service => { %>
+        <li>[<%= service.position %>] <%= service.name %> (<%= service.type %>, <%= service.url %>): <%= service.status %></li>
+      <% }) %>
+    </ul>
+    <script type="text/javascript">
+      setInterval(() => {
+        window.location.reload()
+      }, 300000)
+    </script>
+  </body>
+</html>
