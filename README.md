@@ -29,9 +29,9 @@ Add services to a new file `listServices.json` under the folder `monitoring`:
 ]
 ```
 Make sure not to forget to add the "macaroon" property for LND nodes, (Give it a readonly.macaroon for safety!)
-and make sure the node is actually listening for REST connections. (`rpclisten` parameter.)
+and make sure the node is actually listening for REST connections. (`restlisten` parameter.)
 
-If you run your node in a Docker container or on the cloud, check whether the RPC port is exposed as well.
+If you run your node in a Docker container or on the cloud, check whether the REST API port is exposed as well.
 
 Finally you can run the program:
 ```
