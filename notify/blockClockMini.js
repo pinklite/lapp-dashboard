@@ -30,4 +30,13 @@ const fillEmpty = () => {
   })
 }
 
-module.exports = { update, pause, fillEmpty }
+const flash = () => {
+  if (!process.env.USE_BCMINI === 'true') return
+  try {
+    await axios.get(`http://${process.env.BCMINI_LOCAL_IP}/api/lights/flash`)
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+module.exports = { update, pause, fillEmpty, flash }

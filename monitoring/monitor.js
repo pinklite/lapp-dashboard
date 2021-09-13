@@ -32,6 +32,9 @@ const handleError = (prev, position, name) => {
     }
     bcMini.update(name, 'ERR', position)
   }
+  if (prev === 'ERR') {
+    bcMini.flash()
+  }
 }
 
 const sleep = (milliseconds) => {
