@@ -24,6 +24,7 @@ const handleSuccess = (prev, position, name) => {
 const handleError = (prev, position, name) => {
   resultDB.storeNewResult(position, 'ERR')
   if (prev === '1ST') {
+    discordMessage(`Service is DOWN: ${name}`)
     bcMini.update(name, 'ERR', position)
   }
   if (prev === 'OK' || typeof prev === undefined) {
