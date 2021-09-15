@@ -31,7 +31,7 @@ const fillEmpty = () => {
 }
 
 const flash = () => {
-  if (!process.env.USE_BCMINI === 'true') return
+  if (process.env.USE_BCMINI !== 'true') return
   try {
     axios.get(`http://${process.env.BCMINI_LOCAL_IP}/api/lights/flash`)
   } catch (err) {
