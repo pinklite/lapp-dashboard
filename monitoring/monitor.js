@@ -91,7 +91,6 @@ const monitor = async (services) => {
               handleSuccess(prev, s.position, s.name)
             })
             .catch(err => {
-              console.error(err)
               // Parse error code...
               handleError(prev, s.position, s.name)
             })
