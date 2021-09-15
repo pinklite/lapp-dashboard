@@ -29,7 +29,8 @@ const getLatestResult = (position, callback) => {
     if (rows.length === 0) {
       return callback('1ST')
     }
-    return callback(rows[0].status)
+  
+    return callback(`${rows[0].status}`)
   })
 }
 

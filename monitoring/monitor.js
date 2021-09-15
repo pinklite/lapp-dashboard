@@ -34,6 +34,7 @@ const handleError = (prev, position, name) => {
     bcMini.update(name, 'ERR', position)
   }
   if (prev === 'ERR') {
+    // Note: Flashing is disabled on the BlockClock Mini from the factory.
     bcMini.flash()
   }
 }

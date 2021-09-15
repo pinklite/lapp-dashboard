@@ -30,6 +30,7 @@ const fillEmpty = () => {
   })
 }
 
+// Note: Flashing is disabled on the blockclock mini from the factory.
 const flash = () => {
   if (process.env.USE_BCMINI !== 'true') return
   try {
